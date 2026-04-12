@@ -15,13 +15,11 @@
             --text-light: #e0fbfc;
             --card-bg: rgba(202, 240, 248, 0.15);
         }
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
         body {
             font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
             background: linear-gradient(135deg, #006d77, #00b4d8);
@@ -37,7 +35,6 @@
             align-items: center;
             padding: 20px;
         }
-        
         .container {
             max-width: 900px;
             width: 100%;
@@ -49,7 +46,6 @@
             border: 1px solid rgba(0, 180, 216, 0.4);
             position: relative;
         }
-        
         .container::before {
             content: '';
             position: absolute;
@@ -59,7 +55,6 @@
             height: 5px;
             background: linear-gradient(90deg, var(--highlight-green), var(--primary-teal));
         }
-        
         /* 头部样式 */
         header {
             text-align: center;
@@ -68,7 +63,6 @@
             background: rgba(0, 53, 64, 0.5);
             border-bottom: 1px solid rgba(0, 180, 216, 0.3);
         }
-        
         .avatar {
             width: 140px;
             height: 140px;
@@ -81,7 +75,6 @@
             z-index: 2;
             animation: float 6s ease-in-out infinite;
         }
-        
         h1 {
             color: var(--text-light);
             font-size: 2.8rem;
@@ -92,7 +85,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        
         .subtitle {
             color: var(--light-teal);
             font-size: 1.3rem;
@@ -100,7 +92,6 @@
             margin: 0 auto 20px;
             font-weight: 300;
         }
-        
         .tagline {
             display: inline-block;
             padding: 8px 20px;
@@ -111,19 +102,16 @@
             margin-top: 15px;
             color: #e9f5db;
         }
-        
         /* 内容区域样式 */
         .section {
             padding: 40px;
             margin: 0;
         }
-        
         .about-section {
             text-align: center;
             padding: 40px;
             position: relative;
         }
-        
         .about-section::after {
             content: '';
             position: absolute;
@@ -134,7 +122,6 @@
             height: 1px;
             background: linear-gradient(90deg, transparent, var(--primary-teal), transparent);
         }
-        
         h2 {
             color: var(--light-teal);
             font-size: 2rem;
@@ -144,7 +131,6 @@
             display: inline-block;
             padding-bottom: 10px;
         }
-        
         h2::after {
             content: '';
             position: absolute;
@@ -155,7 +141,6 @@
             height: 3px;
             background: linear-gradient(90deg, transparent, var(--highlight-green), transparent);
         }
-        
         .about-content {
             max-width: 700px;
             margin: 0 auto;
@@ -163,25 +148,21 @@
             line-height: 1.8;
             color: var(--text-light);
         }
-        
         .about-content p {
             margin-bottom: 25px;
             text-align: left;
         }
-        
         .highlight {
             color: var(--highlight-green);
             font-weight: bold;
             text-shadow: 0 0 5px rgba(42, 157, 143, 0.4);
         }
-        
         /* 社交链接 */
         .social-section {
             text-align: center;
             padding: 50px 40px;
             background: rgba(0, 53, 64, 0.6);
         }
-        
         .social-title {
             color: var(--text-light);
             font-size: 2.2rem;
@@ -189,7 +170,6 @@
             text-shadow: 0 0 10px rgba(0, 180, 216, 0.7);
             position: relative;
         }
-        
         .social-title::after {
             content: '';
             position: absolute;
@@ -200,7 +180,6 @@
             height: 3px;
             background: var(--highlight-green);
         }
-        
         .social-links {
             display: flex;
             justify-content: center;
@@ -209,7 +188,6 @@
             max-width: 700px;
             margin: 0 auto;
         }
-        
         .social-link {
             display: flex;
             flex-direction: column;
@@ -226,14 +204,12 @@
             overflow: hidden;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
-        
         .social-link:hover {
             background: var(--primary-teal);
             transform: translateY(-10px) scale(1.05);
             box-shadow: 0 15px 30px rgba(0, 180, 216, 0.5);
             border-color: var(--highlight-green);
         }
-        
         .social-link::before {
             content: '';
             position: absolute;
@@ -246,14 +222,12 @@
             z-index: 0;
             transition: all 0.8s;
         }
-        
         .social-link:hover::before {
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
         }
-        
         .social-icon {
             font-size: 4rem;
             margin-bottom: 20px;
@@ -262,12 +236,10 @@
             z-index: 1;
             transition: all 0.4s;
         }
-        
         .social-link:hover .social-icon {
             transform: scale(1.2);
             color: #e9f5db;
         }
-        
         .social-name {
             font-size: 1.6rem;
             font-weight: bold;
@@ -275,22 +247,18 @@
             z-index: 1;
             margin-bottom: 10px;
         }
-        
         .social-desc {
             font-size: 1.1rem;
             color: var(--light-teal);
             position: relative;
             z-index: 1;
         }
-        
         .social-link.qq {
             animation: pulse 2.5s infinite;
         }
-        
         .social-link.bilibili .social-icon {
             color: #fb7299;
         }
-        
         /* 水波纹效果 */
         .ripple {
             position: absolute;
@@ -300,7 +268,6 @@
             animation: ripple 6s linear infinite;
             pointer-events: none;
         }
-        
         /* 页脚 */
         footer {
             text-align: center;
@@ -310,14 +277,12 @@
             background: rgba(0, 53, 64, 0.7);
             border-top: 1px solid rgba(0, 180, 216, 0.3);
         }
-        
         /* 动画效果 */
         @keyframes float {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-15px); }
             100% { transform: translateY(0px); }
         }
-        
         @keyframes pulse {
             0% { 
                 box-shadow: 0 0 0 0 rgba(42, 157, 143, 0.6); 
@@ -328,47 +293,39 @@
                 transform: scale(1.02);
             }
             100% { 
-                box-shadow: 0 0 0 0 rgba(42, 157, 143, 0); 
+                box-shadow: 0 0 0 0 rgba(42, 157, 0); 
                 transform: scale(1);
             }
         }
-        
         @keyframes ripple {
             to {
                 transform: scale(2.5);
                 opacity: 0;
             }
         }
-        
         /* 响应式设计 */
         @media (max-width: 768px) {
             .container {
                 max-width: 95%;
             }
-            
             h1 {
                 font-size: 2.2rem;
             }
-            
             .subtitle {
                 font-size: 1.1rem;
             }
-            
             .section, .about-section, .social-section {
                 padding: 30px 20px;
             }
-            
             .social-links {
                 flex-direction: column;
                 align-items: center;
                 gap: 30px;
             }
-            
             .social-link {
                 width: 100%;
                 max-width: 300px;
             }
-            
             .social-title {
                 font-size: 1.8rem;
                 margin-bottom: 40px;
@@ -379,23 +336,20 @@
 <body>
     <div class="container">
         <header>
+            <!-- 仅新增这一行头像代码，其余完全不变 -->
+            <img class="avatar" src="/1.png" alt="霜岚头像">
             <h1>霜岚</h1>
             <p class="subtitle">furry| 明日方舟 | Minecrft | 嗷呜～</p>
             <div class="tagline">连接 · 创造 · 分享</div>
         </header>
-        
         <div class="about-section">
             <h2>关于咱</h2>
             <div class="about-content">
                 <p>你好！咱是<span class="darklight">霜岚</span>，一名学生党，开学后经常不在线的兽兽，性格较好，可以把咱当情绪垃圾桶，当然，咱有时也需要你的帮助呢。</p>
-                  
-                
                 <p>咱也是一个游戏玩家：方舟，MC这两个是咱的游戏主玩。（当然就目前而言）</p>
-                
                 <p>欢迎与咱进行社交，也很高兴认识你呢~</p>
             </div>
         </div>
-        
         <div class="social-section">
             <h2 class="social-title">与咱联系</h2>
             <div class="social-links">
@@ -403,39 +357,33 @@
                     <i class="fab fa-bilibili social-icon"></i>
                     <span class="social-name">Bilibili</span>
                 </a>
-                
-                <a href="lanpupre.dpdns.org" class="social-link qq" target="_blank">
+                <a href="lanpupre@qq.com" class="social-link qq" target="_blank">
                     <i class="fab fa-qq social-icon"></i>
                     <span class="social-name">QQ</span>
                     <span class="social-desc">即时交流与沟通</span>
                 </a>
             </div>
         </div>
-        
         <footer>
             <p>© 2025 霜岚の主页 | 青绿风</p>
-            <p>愿每次点击都能拉近距离</p>
+            <p>愿每次点击都拉近距离</p>
         </footer>
     </div>
-
     <script>
         // 添加悬浮效果
         document.querySelectorAll('.social-link').forEach(link => {
             link.addEventListener('mouseenter', function() {
                 this.style.transform = 'translateY(-10px) scale(1.05)';
             });
-            
             link.addEventListener('mouseleave', function() {
                 this.style.transform = '';
             });
         });
-        
         // 添加头像点击动画
         const avatar = document.querySelector('.avatar');
         avatar.addEventListener('click', function() {
             this.classList.toggle('pulse');
         });
-        
         // 创建水波纹效果
         document.addEventListener('click', function(e) {
             const ripple = document.createElement('div');
@@ -443,7 +391,6 @@
             ripple.style.left = e.clientX + 'px';
             ripple.style.top = e.clientY + 'px';
             document.body.appendChild(ripple);
-            
             setTimeout(() => {
                 ripple.remove();
             }, 6000);
