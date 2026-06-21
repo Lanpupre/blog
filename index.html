@@ -15,11 +15,10 @@
             --text-light: #e0fbfc;
             --card-bg: rgba(202, 240, 248, 0.15);
         }
-        /* 优化加载速度：关键CSS前置 */
         html { scroll-behavior: smooth; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        /* ———— 漫画风风扇旋转加载（高斯模糊+绿色渐变） ———— */
+        /* ———— 加载动画 ———— */
         #preloader {
             position: fixed;
             top: 0; left: 0;
@@ -38,7 +37,6 @@
             visibility: hidden;
             transform: scale(1.05);
         }
-        /* 漫画风风扇旋转 */
         .fan-loader {
             width: 70px; height: 70px;
             position: relative;
@@ -177,6 +175,7 @@
             pointer-events: none;
         }
 
+        /* ———— 主体样式 ———— */
         body {
             font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
             background: linear-gradient(135deg, #006d77, #00b4d8);
@@ -303,6 +302,266 @@
             font-weight: bold;
             text-shadow: 0 0 5px rgba(42, 157, 143, 0.4);
         }
+
+        /* ———— 访客打卡墙 ———— */
+        .checkin-section {
+            text-align: center;
+            padding: 40px 30px 50px;
+            background: rgba(0, 53, 64, 0.3);
+            border-top: 1px solid rgba(0, 180, 216, 0.2);
+            border-bottom: 1px solid rgba(0, 180, 216, 0.2);
+        }
+        .checkin-section h2 {
+            margin-bottom: 25px;
+        }
+        .checkin-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(0, 119, 182, 0.15);
+            border: 1px solid rgba(0, 180, 216, 0.25);
+            border-radius: 18px;
+            padding: 28px 25px 20px;
+            backdrop-filter: blur(4px);
+        }
+        .checkin-stats {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            padding: 10px 0 20px;
+            border-bottom: 1px solid rgba(0, 180, 216, 0.15);
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-number {
+            display: block;
+            font-size: 2.2rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--light-teal), var(--highlight-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.3;
+            transition: all 0.3s ease;
+        }
+        .stat-number.pop {
+            animation: popNumber 0.5s ease;
+        }
+        @keyframes popNumber {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.4); }
+            100% { transform: scale(1); }
+        }
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--light-teal);
+            opacity: 0.7;
+        }
+        .checkin-input-area {
+            padding: 20px 0 15px;
+        }
+        .checkin-form {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .checkin-form input {
+            flex: 1;
+            min-width: 180px;
+            padding: 12px 18px;
+            border-radius: 30px;
+            border: 2px solid rgba(0, 180, 216, 0.4);
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-light);
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+        .checkin-form input::placeholder {
+            color: rgba(224, 251, 252, 0.5);
+        }
+        .checkin-form input:focus {
+            border-color: var(--highlight-green);
+            box-shadow: 0 0 20px rgba(42, 157, 143, 0.2);
+            background: rgba(255, 255, 255, 0.12);
+        }
+        .checkin-form button {
+            padding: 12px 32px;
+            background: linear-gradient(135deg, var(--highlight-green), var(--primary-teal));
+            border: none;
+            border-radius: 30px;
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(42, 157, 143, 0.3);
+            font-weight: 500;
+            letter-spacing: 1px;
+            white-space: nowrap;
+            font-family: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+        .checkin-form button:hover:not(:disabled) {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 180, 216, 0.4);
+        }
+        .checkin-form button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        .checkin-form button .ripple-effect {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(0);
+            animation: btnRipple 0.6s ease-out forwards;
+            pointer-events: none;
+        }
+        @keyframes btnRipple {
+            to { transform: scale(4); opacity: 0; }
+        }
+        .checkin-tip {
+            margin-top: 14px;
+            font-size: 0.9rem;
+            color: var(--light-teal);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+        .checkin-tip.success {
+            color: var(--highlight-green);
+            opacity: 1;
+        }
+        .checkin-tip.error {
+            color: #f8a5a5;
+            opacity: 1;
+        }
+        .checkin-wall {
+            max-height: 350px;
+            overflow-y: auto;
+            text-align: left;
+            border-top: 1px solid rgba(0, 180, 216, 0.15);
+            padding-top: 16px;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(0, 180, 216, 0.3) transparent;
+        }
+        .checkin-wall::-webkit-scrollbar {
+            width: 4px;
+        }
+        .checkin-wall::-webkit-scrollbar-thumb {
+            background: rgba(0, 180, 216, 0.3);
+            border-radius: 4px;
+        }
+        .checkin-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 14px;
+            margin-bottom: 6px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.04);
+            border-left: 3px solid var(--primary-teal);
+            transition: background 0.2s;
+            animation: fadeInItem 0.4s ease;
+        }
+        .checkin-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .checkin-item .name {
+            font-weight: 500;
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+        .checkin-item .name .emoji {
+            margin-right: 6px;
+        }
+        .checkin-item .time {
+            font-size: 0.8rem;
+            color: var(--light-teal);
+            opacity: 0.6;
+            flex-shrink: 0;
+            margin-left: 12px;
+        }
+        .checkin-item .badge {
+            font-size: 0.7rem;
+            background: rgba(42, 157, 143, 0.2);
+            color: var(--highlight-green);
+            padding: 2px 10px;
+            border-radius: 20px;
+            margin-left: 8px;
+            flex-shrink: 0;
+        }
+        .checkin-loading,
+        .checkin-empty {
+            text-align: center;
+            padding: 30px 0;
+            color: var(--light-teal);
+            opacity: 0.6;
+            font-size: 0.95rem;
+        }
+        .checkin-footer {
+            margin-top: 16px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--light-teal);
+            opacity: 0.5;
+            border-top: 1px solid rgba(0, 180, 216, 0.1);
+            padding-top: 14px;
+        }
+        @keyframes fadeInItem {
+            from { opacity: 0; transform: translateY(-10px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* 庆祝动画容器 */
+         #celebration-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9997;
+            overflow: hidden;
+        }
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            opacity: 0;
+            animation: confettiFall linear forwards;
+        }
+        @keyframes confettiFall {
+            0% {
+                opacity: 1;
+                transform: translateY(-20px) rotate(0deg) scale(0.5);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(110vh) rotate(720deg) scale(1.2);
+            }
+        }
+        .float-star {
+            position: absolute;
+            font-size: 2rem;
+            animation: starFloat 1.2s ease-out forwards;
+            pointer-events: none;
+        }
+        @keyframes starFloat {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(0.5) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-150px) scale(1.5) rotate(360deg);
+            }
+        }
+
+        /* ———— 社交 & 页脚 ———— */
         .social-section {
             text-align: center;
             padding: 50px 40px;
@@ -415,6 +674,8 @@
             background: rgba(0, 53, 64, 0.7);
             border-top: 1px solid rgba(0, 180, 216, 0.3);
         }
+
+        /* ———— 动画 ———— */
         @keyframes float {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-15px); }
@@ -428,6 +689,7 @@
         @keyframes ripple {
             to { transform: scale(2.5); opacity: 0; }
         }
+
         @media (max-width: 768px) {
             .container { max-width: 95%; }
             h1 { font-size: 2.2rem; }
@@ -439,11 +701,18 @@
             .birthday-card { padding: 35px 25px; }
             .birthday-title { font-size: 2rem; }
             .birthday-icon { font-size: 5rem; }
+            .checkin-stats { gap: 30px; }
+            .stat-number { font-size: 1.8rem; }
+            .checkin-form { flex-direction: column; }
+            .checkin-form input { min-width: unset; width: 100%; }
+            .checkin-form button { width: 100%; }
+            .checkin-item { flex-wrap: wrap; gap: 4px; }
+            .checkin-item .time { margin-left: 0; width: 100%; font-size: 0.75rem; }
         }
     </style>
 </head>
 <body>
-    <!-- 漫画风风扇加载 -->
+    <!-- 加载动画 -->
     <div id="preloader">
         <div class="fan-loader"><span></span></div>
         <div class="loading-text">Loading...</div>
@@ -460,15 +729,18 @@
         </div>
     </div>
 
-    <!-- 主体结构 -->
+    <!-- 庆祝动画容器 -->
+    <div id="celebration-container"></div>
+
+    <!-- 主体 -->
     <div class="container">
         <header>
             <img class="avatar" src="/1.png" alt="霜岚头像">
             <h1>霜岚</h1>
-            <!-- 已改为 Arknights -->
             <p class="subtitle">furry | Arknights | Minecraft | 嗷呜～</p>
             <div class="tagline">连接 · 创造 · 分享</div>
         </header>
+
         <div class="about-section">
             <h2>关于咱</h2>
             <div class="about-content">
@@ -477,6 +749,39 @@
                 <p>欢迎与咱进行社交，也很高兴认识你呢~</p>
             </div>
         </div>
+
+        <!-- ====== 访客打卡墙 ====== -->
+        <div class="checkin-section">
+            <h2>📝 访客打卡墙</h2>
+            <div class="checkin-container">
+                <div class="checkin-stats">
+                    <div class="stat-item">
+                        <span class="stat-number" id="totalCount">0</span>
+                        <span class="stat-label">总打卡</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="todayCount">0</span>
+                        <span class="stat-label">今日打卡</span>
+                    </div>
+                </div>
+
+                <div class="checkin-input-area">
+                    <div class="checkin-form">
+                        <input type="text" id="checkinName" placeholder="输入你的名字..." maxlength="20" autocomplete="off">
+                        <button id="checkinBtn">✨ 打卡</button>
+                    </div>
+                    <p class="checkin-tip" id="checkinTip">留下你的名字，让霜岚知道你来过～</p>
+                </div>
+
+                <div class="checkin-wall" id="checkinWall">
+                    <div class="checkin-loading">加载打卡记录中...</div>
+                </div>
+                <div class="checkin-footer">
+                    <span id="checkinTotal">共 0 条打卡</span>
+                </div>
+            </div>
+        </div>
+
         <div class="social-section">
             <h2 class="social-title">与咱联系</h2>
             <div class="social-links">
@@ -484,7 +789,6 @@
                     <i class="fab fa-bilibili social-icon"></i>
                     <span class="social-name">Bilibili</span>
                 </a>
-                <!-- QQ 改为邮箱，点击发邮件 -->
                 <a href="mailto:lanpupre@163.com" class="social-link email" target="_blank">
                     <i class="fas fa-envelope social-icon"></i>
                     <span class="social-name">Email</span>
@@ -499,14 +803,15 @@
     </div>
 
     <script>
-        // 预加载（优化执行时机）
+        // ============================================================
+        //  预加载 & 生日彩蛋 & 交互（原有功能）
+        // ============================================================
         window.addEventListener('load', function() {
             const preloader = document.getElementById('preloader');
             preloader.classList.add('hidden');
             setTimeout(checkBirthdayEgg, 500);
         });
 
-        // 生日判定
         function checkBirthdayEgg() {
             const now = new Date();
             const month = now.getMonth() + 1;
@@ -519,7 +824,6 @@
             }
         }
 
-        // 打字机
         function typeWriter() {
             const text = "6月27日，岁岁常欢愉，万事皆胜意，愿你永远热烈自由✨";
             const ele = document.getElementById('typeText');
@@ -534,7 +838,6 @@
             write();
         }
 
-        // 烟花
         function initFireworks() {
             const canvas = document.getElementById('fireworks');
             const ctx = canvas.getContext('2d');
@@ -578,12 +881,10 @@
             loop();
         }
 
-        // 关闭彩蛋
         document.getElementById('closeBirthday').addEventListener('click', () => {
             document.getElementById('birthdayEgg').classList.remove('show');
         });
 
-        // 交互优化
         document.addEventListener('click', function(e) {
             const ripple = document.createElement('div');
             ripple.className = 'ripple';
@@ -592,6 +893,252 @@
             document.body.appendChild(ripple);
             setTimeout(() => ripple.remove(), 4000);
         });
+
+        // ============================================================
+        //  访客打卡功能（留名 + 动画 + 违禁词过滤）
+        // ============================================================
+        (function() {
+            // ====== 🔧 违禁词配置（请在此填写） ======
+            // 示例：window.bannedWords = ['违禁词1', '违禁词2', '敏感词'];
+            window.bannedWords = [
+                // 请在此处添加违禁词，例如：
+                // '违禁词1',
+                // '违禁词2',
+                // '敏感词'
+            ];
+            // ==========================================
+
+            // ⚠️ 请将下方 API_BASE 替换为您的 Cloudflare Worker 域名
+            const API_BASE = 'https://daka.lanpupre.dpdns.org';
+
+            const input = document.getElementById('checkinName');
+            const btn = document.getElementById('checkinBtn');
+            const tip = document.getElementById('checkinTip');
+            const wall = document.getElementById('checkinWall');
+            const totalEl = document.getElementById('totalCount');
+            const todayEl = document.getElementById('todayCount');
+            const totalFooter = document.getElementById('checkinTotal');
+
+            const emojis = ['🐾', '🌟', '✨', '🌈', '🎈', '🌸', '🌿', '🍀', '💫', '⭐', '🦊', '🐱', '🌺', '🍃', '🎀', '🧸'];
+
+            const savedName = localStorage.getItem('checkin_visitor_name');
+            if (savedName) {
+                input.value = savedName;
+            }
+
+            // ====== 违禁词检测 ======
+            function containsBannedWord(text) {
+                const banned = window.bannedWords || [];
+                if (!banned.length) return false;
+                const lowerText = text.toLowerCase();
+                for (const word of banned) {
+                    if (!word) continue;
+                    if (lowerText.includes(word.toLowerCase())) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            // ====== 获取打卡列表 ======
+            async function fetchCheckins() {
+                try {
+                    wall.innerHTML = '<div class="checkin-loading">加载打卡记录中...</div>';
+                    const res = await fetch(`${API_BASE}/api/checkin`);
+                    const data = await res.json();
+
+                    if (data.success) {
+                        totalEl.textContent = data.total || 0;
+                        todayEl.textContent = data.todayCount || 0;
+
+                        if (data.records && data.records.length > 0) {
+                            renderCheckins(data.records);
+                            totalFooter.textContent = `共 ${data.records.length} 条打卡`;
+                        } else {
+                            wall.innerHTML = '<div class="checkin-empty">还没有打卡记录，快来留下你的名字吧 🐾</div>';
+                            totalFooter.textContent = '共 0 条打卡';
+                        }
+                    } else {
+                        wall.innerHTML = '<div class="checkin-empty">加载失败，请刷新重试 😿</div>';
+                    }
+                } catch (err) {
+                    console.warn('获取打卡列表失败:', err);
+                    wall.innerHTML = '<div class="checkin-empty">加载失败，请刷新重试 😿</div>';
+                }
+            }
+
+            function renderCheckins(records) {
+                if (records.length === 0) {
+                    wall.innerHTML = '<div class="checkin-empty">还没有打卡记录，快来留下你的名字吧 🐾</div>';
+                    return;
+                }
+                let html = '';
+                const today = new Date().toISOString().split('T')[0];
+                records.forEach((r, index) => {
+                    const emoji = emojis[index % emojis.length];
+                    const isToday = r.time && r.time.startsWith(today);
+                    const badge = isToday ? '<span class="badge">今日</span>' : '';
+                    html += `
+                        <div class="checkin-item">
+                            <span class="name"><span class="emoji">${emoji}</span>${escapeHtml(r.name)} ${badge}</span>
+                            <span class="time">${r.timeStr || r.time}</span>
+                        </div>
+                    `;
+                });
+                wall.innerHTML = html;
+                if (wall.firstChild) {
+                    wall.scrollTop = 0;
+                }
+            }
+
+            function escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
+            // ====== 庆祝动画 ======
+            function triggerCelebration() {
+                const container = document.getElementById('celebration-container');
+                const colors = ['#ff6b6b', '#feca57', '#48dbfb', '#1dd1a1', '#a29bfe', '#fd79a8', '#00b4d8', '#2a9d8f'];
+                for (let i = 0; i < 30; i++) {
+                    const el = document.createElement('div');
+                    el.className = 'confetti-piece';
+                    const size = 6 + Math.random() * 10;
+                    el.style.width = size + 'px';
+                    el.style.height = size + 'px';
+                    el.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    el.style.left = Math.random() * 100 + '%';
+                    el.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+                    el.style.animationDuration = (1.5 + Math.random() * 2) + 's';
+                    el.style.animationDelay = (Math.random() * 0.5) + 's';
+                    container.appendChild(el);
+                    setTimeout(() => el.remove(), 4000);
+                }
+                const starSymbols = ['⭐', '🌟', '✨', '💫', '🎉', '🎊'];
+                for (let i = 0; i < 8; i++) {
+                    const el = document.createElement('div');
+                    el.className = 'float-star';
+                    el.textContent = starSymbols[Math.floor(Math.random() * starSymbols.length)];
+                    el.style.left = (10 + Math.random() * 80) + '%';
+                    el.style.top = (30 + Math.random() * 50) + '%';
+                    el.style.fontSize = (1.5 + Math.random() * 2) + 'rem';
+                    el.style.animationDuration = (0.8 + Math.random() * 0.6) + 's';
+                    container.appendChild(el);
+                    setTimeout(() => el.remove(), 2000);
+                }
+
+document.querySelectorAll('.stat-number').forEach(el => {
+                    el.classList.remove('pop');
+                    void el.offsetWidth;
+                    el.classList.add('pop');
+                });
+            }
+
+            // 按钮涟漪
+            function createRipple(e) {
+                const button = e.currentTarget;
+                const rect = button.getBoundingClientRect();
+                const ripple = document.createElement('span');
+                ripple.className = 'ripple-effect';
+                const size = Math.max(rect.width, rect.height);
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = (e.clientX - rect.left - size/2) + 'px';
+                ripple.style.top = (e.clientY - rect.top - size/2) + 'px';
+                button.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
+            }
+            btn.addEventListener('click', createRipple);
+
+            // ====== 执行打卡 ======
+            async function doCheckin() {
+                const name = input.value.trim();
+
+                if (!name) {
+                    tip.textContent = '⚠️ 请输入你的名字～';
+                    tip.className = 'checkin-tip error';
+                    input.focus();
+                    return;
+                }
+
+                if (name.length > 20) {
+                    tip.textContent = '⚠️ 名字不能超过20个字符哦～';
+                    tip.className = 'checkin-tip error';
+                    return;
+                }
+
+                // 违禁词检测
+                if (containsBannedWord(name)) {
+                    tip.textContent = '⚠️ 检测到敏感内容，请重新输入～';
+                    tip.className = 'checkin-tip error';
+                    input.value = '';
+                    input.focus();
+                    return;
+                }
+
+                btn.disabled = true;
+                btn.textContent = '⏳ 打卡中...';
+                tip.textContent = '正在记录...';
+                tip.className = 'checkin-tip';
+
+                try {
+                    const res = await fetch(`${API_BASE}/api/checkin`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ name: name }),
+                    });
+                    const data = await res.json();
+
+                    if (data.success) {
+                        localStorage.setItem('checkin_visitor_name', name);
+                        tip.textContent = '🎉 打卡成功！感谢你的来访～';
+                        tip.className = 'checkin-tip success';
+                        input.value = '';
+
+                        totalEl.textContent = data.total || 0;
+                        todayEl.textContent = data.todayCount || 0;
+
+                        triggerCelebration();
+                        await fetchCheckins();
+
+                        document.querySelector('.checkin-section').scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                        setTimeout(() => {
+                            btn.disabled = false;
+                            btn.textContent = '✨ 打卡';
+                        }, 1500);
+                    } else {
+                        tip.textContent = '⚠️ ' + (data.message || '打卡失败，请稍后重试');
+                        tip.className = 'checkin-tip error';
+                        btn.disabled = false;
+                        btn.textContent = '✨ 打卡';
+                    }
+                } catch (err) {
+                    console.error('打卡请求失败:', err);
+                    tip.textContent = '⚠️ 网络异常，请稍后重试';
+                    tip.className = 'checkin-tip error';
+                    btn.disabled = false;
+                    btn.textContent = '✨ 打卡';
+                }
+            }
+            
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    doCheckin();
+                }
+            });
+
+            btn.addEventListener('click', doCheckin);
+
+            if (document.readyState === 'complete') {
+                fetchCheckins();
+            } else {
+                window.addEventListener('load', fetchCheckins);
+            }
+
+            setInterval(fetchCheckins, 30000);
+        })();
     </script>
 </body>
 </html>
