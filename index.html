@@ -1,3 +1,4 @@
+html
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -19,7 +20,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         /* ———— 加载动画 ———— */
-        #preloader {
+       #preloader {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
@@ -517,7 +518,7 @@
         }
 
         /* 庆祝动画容器 */
-         #celebration-container {
+        #celebration-container {
             position: fixed;
             top: 0;
             left: 0;
@@ -768,7 +769,7 @@
                 <div class="checkin-input-area">
                     <div class="checkin-form">
                         <input type="text" id="checkinName" placeholder="输入你的名字..." maxlength="20" autocomplete="off">
-                        <button id="checkinBtn">✨ 到此一游</button>
+                        <button id="checkinBtn">✨ 打卡</button>
                     </div>
                     <p class="checkin-tip" id="checkinTip">留下你的名字，让霜岚知道你来过～</p>
                 </div>
@@ -777,7 +778,7 @@
                     <div class="checkin-loading">加载打卡记录中...</div>
                 </div>
                 <div class="checkin-footer">
-                    <span id="checkinTotal">共 0 条打卡记录</span>
+                    <span id="checkinTotal">共 0 条打卡</span>
                 </div>
             </div>
         </div>
@@ -895,22 +896,22 @@
         });
 
         // ============================================================
-        //  访客打卡功能（留名 + 动画 + 违禁词过滤）
+        //  访客打卡功能（纯前端 + JSONBin 存储）
         // ============================================================
         (function() {
-            // ====== 🔧 违禁词配置（请在此填写） ======
-            // 示例：window.bannedWords = ['违禁词1', '违禁词2', '敏感词'];
-            window.bannedWords = [
-                // 请在此处添加违禁词，例如：
+            // ====== 🔧 配置（请替换为你的 JSONBin 信息） ======
+            const BIN_ID = '你的BinID';           // 从 JSONBin 获取
+            const API_KEY = '你的MasterKey';      // 从 JSONBin 获取
+            const API_URL = 'https://api.jsonbin.io/v3/b/' + BIN_ID;
+            // ===================================================
+
+            // 🔧 违禁词列表（自行填写）
+            const BANNED_WORDS = [
                 // '违禁词1',
                 // '违禁词2',
-                // '敏感词'
             ];
-            // ==========================================
 
-            // ⚠️ 请将下方 API_BASE 替换为您的 Cloudflare Worker 域名
-            const API_BASE = https://daka.lanpupre.dpdns.org;
-
+            // DOM 元素
             const input = document.getElementById('checkinName');
             const btn = document.getElementById('checkinBtn');
             const tip = document.getElementById('checkinTip');
@@ -921,6 +922,7 @@
 
             const emojis = ['🐾', '🌟', '✨', '🌈', '🎈', '🌸', '🌿', '🍀', '💫', '⭐', '🦊', '🐱', '🌺', '🍃', '🎀', '🧸'];
 
+            // 从 localStorage 读取上次输入的名字
             const savedName = localStorage.getItem('checkin_visitor_name');
             if (savedName) {
                 input.value = savedName;
@@ -928,48 +930,56 @@
 
             // ====== 违禁词检测 ======
             function containsBannedWord(text) {
-                const banned = window.bannedWords || [];
-                if (!banned.length) return false;
+                if (!BANNED_WORDS.length) return false;
                 const lowerText = text.toLowerCase();
-                for (const word of banned) {
-                    if (!word) continue;
-                    if (lowerText.includes(word.toLowerCase())) {
+                for (const word of BANNED_WORDS) {
+                    if (word && lowerText.includes(word.toLowerCase())) {
                         return true;
                     }
                 }
                 return false;
             }
 
+            // ====== JSONBin 数据读写 ======
+            async function loadData() {
+                try {
+                    const res = await fetch(API_URL, {
+                        headers: { 'X-Master-Key': API_KEY }
+                    });
+                    if (!res.ok) throw new Error('Load failed');
+                    const data = await res.json();
+                    return data.record || { total: 0, todayCount: 0, lastDate: '', records: [] };
+                } catch (err) {
+                    console.warn('加载数据失败:', err);
+                    return { total: 0, todayCount: 0, lastDate: '', records: [] };
+                }
+            }
+
+            async function saveData(data) {
+                await fetch(API_URL, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Master-Key': API_KEY
+                    },
+                    body: JSON.stringify(data)
+                });
+            }
+
             // ====== 获取打卡列表 ======
             async function fetchCheckins() {
                 try {
                     wall.innerHTML = '<div class="checkin-loading">加载打卡记录中...</div>';
-                    const res = await fetch(`${API_BASE}/api/checkin`);
-                    const data = await res.json();
+                    const data = await loadData();
+                    
+                    totalEl.textContent = data.total || 0;
+                    todayEl.textContent = data.todayCount || 0;
 
-                    if (data.success) {
-                        totalEl.textContent = data.total || 0;
-                        todayEl.textContent = data.todayCount || 0;
-
-                        if (data.records && data.records.length > 0) {
-                            renderCheckins(data.records);
-                            totalFooter.textContent = `共 ${data.records.length} 条打卡`;
-                        } else {
-                            wall.innerHTML = '<div class="checkin-empty">还没有打卡记录，快来留下你的名字吧 🐾</div>';
-                            totalFooter.textContent = '共 0 条打卡';
-                        }
+                    if (data.records && data.records.length > 0) {
+                        renderCheckins(data.records);
+                        totalFooter.textContent = `共 ${data.records.length} 条打卡`;
                     } else {
-                        wall.innerHTML = '<div class="checkin-empty">加载失败，请刷新重试 😿</div>';
-                    }
-                } catch (err) {
-                    console.warn('获取打卡列表失败:', err);
-                    wall.innerHTML = '<div class="checkin-empty">加载失败，请刷新重试 😿</div>';
-                }
-            }
-
-            function renderCheckins(records) {
-                if (records.length === 0) {
-                    wall.innerHTML = '<div class="checkin-empty">还没有打卡记录，快来留下你的名字吧 🐾</div>';
+                        wall.innerHTML = '<div class="checkin-empty">还没有打卡记录，快来留下你的名字吧 🐾</div>';
                     return;
                 }
                 let html = '';
@@ -995,6 +1005,15 @@
                 const div = document.createElement('div');
                 div.textContent = text;
                 return div.innerHTML;
+            }
+
+            function formatTime(date) {
+                const y = date.getFullYear();
+                const m = String(date.getMonth() + 1).padStart(2, '0');
+                const d = String(date.getDate()).padStart(2, '0');
+                const h = String(date.getHours()).padStart(2, '0');
+                const min = String(date.getMinutes()).padStart(2, '0');
+                return `${y}-${m}-${d} ${h}:${min}`;
             }
 
             // ====== 庆祝动画 ======
@@ -1027,8 +1046,7 @@
                     container.appendChild(el);
                     setTimeout(() => el.remove(), 2000);
                 }
-
-document.querySelectorAll('.stat-number').forEach(el => {
+                document.querySelectorAll('.stat-number').forEach(el => {
                     el.classList.remove('pop');
                     void el.offsetWidth;
                     el.classList.add('pop');
@@ -1082,46 +1100,61 @@ document.querySelectorAll('.stat-number').forEach(el => {
                 tip.className = 'checkin-tip';
 
                 try {
-                    const res = await fetch(`${API_BASE}/api/checkin`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ name: name }),
-                    });
-                    const data = await res.json();
-
-                    if (data.success) {
-                        localStorage.setItem('checkin_visitor_name', name);
-                        tip.textContent = '🎉 打卡成功！感谢你的来访～';
-                        tip.className = 'checkin-tip success';
-                        input.value = '';
-
-                        totalEl.textContent = data.total || 0;
-                        todayEl.textContent = data.todayCount || 0;
-
-                        triggerCelebration();
-                        await fetchCheckins();
-
-                        document.querySelector('.checkin-section').scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-                        setTimeout(() => {
-                            btn.disabled = false;
-                            btn.textContent = '✨ 打卡';
-                        }, 1500);
+                // 读取现有数据
+                    const data = await loadData();
+                    
+                    const now = new Date();
+                    const today = now.toISOString().split('T')[0];
+                    
+                    // 添加新记录
+                    const newRecord = {
+                        name: name,
+                        time: now.toISOString(),
+                        timeStr: formatTime(now)
+                    };
+                    data.records.unshift(newRecord);
+                    
+                    // 更新总打卡数
+                    data.total = (data.total || 0) + 1;
+                    
+                    // 更新今日打卡数
+                    if (data.lastDate !== today) {
+                        data.todayCount = 1;
+                        data.lastDate = today;
                     } else {
-                        tip.textContent = '⚠️ ' + (data.message || '打卡失败，请稍后重试');
-                        tip.className = 'checkin-tip error';
+                        data.todayCount = (data.todayCount || 0) + 1;
+                    }
+                    
+                    // 保存到 JSONBin
+                    await saveData(data);
+                    
+                    // 更新 UI
+                    localStorage.setItem('checkin_visitor_name', name);
+                    tip.textContent = '🎉 打卡成功！感谢你的来访～';
+                    tip.className = 'checkin-tip success';
+                    input.value = '';
+
+                    totalEl.textContent = data.total;
+                    todayEl.textContent = data.todayCount;
+                    
+                    triggerCelebration();
+                    await fetchCheckins();
+
+                    document.querySelector('.checkin-section').scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                    setTimeout(() => {
                         btn.disabled = false;
                         btn.textContent = '✨ 打卡';
-                    }
+                    }, 1500);
                 } catch (err) {
-                    console.error('打卡请求失败:', err);
-                    tip.textContent = '⚠️ 网络异常，请稍后重试';
+                    console.error('打卡失败:', err);
+                    tip.textContent = '⚠️ 打卡失败，请稍后重试';
                     tip.className = 'checkin-tip error';
                     btn.disabled = false;
                     btn.textContent = '✨ 打卡';
                 }
             }
-            
+
             input.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') {
                     e.preventDefault();
@@ -1131,12 +1164,14 @@ document.querySelectorAll('.stat-number').forEach(el => {
 
             btn.addEventListener('click', doCheckin);
 
+            // 页面加载后获取数据
             if (document.readyState === 'complete') {
                 fetchCheckins();
             } else {
                 window.addEventListener('load', fetchCheckins);
             }
 
+            // 每30秒刷新
             setInterval(fetchCheckins, 30000);
         })();
     </script>
