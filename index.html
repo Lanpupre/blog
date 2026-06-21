@@ -1,4 +1,3 @@
-html
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -18,7 +17,6 @@ html
         }
         html { scroll-behavior: smooth; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         /* ———— 加载动画 ———— */
        #preloader {
             position: fixed;
@@ -75,7 +73,6 @@ html
             0% { opacity: 0.6; }
             100% { opacity: 1; }
         }
-
         /* ———— 生日彩蛋 ———— */
         #birthdayEgg {
             position: fixed;
@@ -175,7 +172,6 @@ html
             width: 100%; height: 100%;
             pointer-events: none;
         }
-
         /* ———— 主体样式 ———— */
         body {
             font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
@@ -303,265 +299,6 @@ html
             font-weight: bold;
             text-shadow: 0 0 5px rgba(42, 157, 143, 0.4);
         }
-
-        /* ———— 访客打卡墙 ———— */
-        .checkin-section {
-            text-align: center;
-            padding: 40px 30px 50px;
-            background: rgba(0, 53, 64, 0.3);
-            border-top: 1px solid rgba(0, 180, 216, 0.2);
-            border-bottom: 1px solid rgba(0, 180, 216, 0.2);
-        }
-        .checkin-section h2 {
-            margin-bottom: 25px;
-        }
-        .checkin-container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: rgba(0, 119, 182, 0.15);
-            border: 1px solid rgba(0, 180, 216, 0.25);
-            border-radius: 18px;
-            padding: 28px 25px 20px;
-            backdrop-filter: blur(4px);
-        }
-        .checkin-stats {
-            display: flex;
-            justify-content: center;
-            gap: 50px;
-            padding: 10px 0 20px;
-            border-bottom: 1px solid rgba(0, 180, 216, 0.15);
-        }
-        .stat-item {
-            text-align: center;
-        }
-        .stat-number {
-            display: block;
-            font-size: 2.2rem;
-            font-weight: bold;
-            background: linear-gradient(135deg, var(--light-teal), var(--highlight-green));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            line-height: 1.3;
-            transition: all 0.3s ease;
-        }
-        .stat-number.pop {
-            animation: popNumber 0.5s ease;
-        }
-        @keyframes popNumber {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.4); }
-            100% { transform: scale(1); }
-        }
-        .stat-label {
-            font-size: 0.85rem;
-            color: var(--light-teal);
-            opacity: 0.7;
-        }
-        .checkin-input-area {
-            padding: 20px 0 15px;
-        }
-        .checkin-form {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .checkin-form input {
-            flex: 1;
-            min-width: 180px;
-            padding: 12px 18px;
-            border-radius: 30px;
-            border: 2px solid rgba(0, 180, 216, 0.4);
-            background: rgba(255, 255, 255, 0.08);
-            color: var(--text-light);
-            font-size: 1rem;
-            outline: none;
-            transition: all 0.3s ease;
-            font-family: inherit;
-        }
-        .checkin-form input::placeholder {
-            color: rgba(224, 251, 252, 0.5);
-        }
-        .checkin-form input:focus {
-            border-color: var(--highlight-green);
-            box-shadow: 0 0 20px rgba(42, 157, 143, 0.2);
-            background: rgba(255, 255, 255, 0.12);
-        }
-        .checkin-form button {
-            padding: 12px 32px;
-            background: linear-gradient(135deg, var(--highlight-green), var(--primary-teal));
-            border: none;
-            border-radius: 30px;
-            color: #fff;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(42, 157, 143, 0.3);
-            font-weight: 500;
-            letter-spacing: 1px;
-            white-space: nowrap;
-            font-family: inherit;
-            position: relative;
-            overflow: hidden;
-        }
-        .checkin-form button:hover:not(:disabled) {
-            transform: scale(1.05);
-            box-shadow: 0 8px 25px rgba(0, 180, 216, 0.4);
-        }
-        .checkin-form button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-        .checkin-form button .ripple-effect {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.4);
-            transform: scale(0);
-            animation: btnRipple 0.6s ease-out forwards;
-            pointer-events: none;
-        }
-        @keyframes btnRipple {
-            to { transform: scale(4); opacity: 0; }
-        }
-        .checkin-tip {
-            margin-top: 14px;
-            font-size: 0.9rem;
-            color: var(--light-teal);
-            opacity: 0.7;
-            transition: all 0.3s ease;
-        }
-        .checkin-tip.success {
-            color: var(--highlight-green);
-            opacity: 1;
-        }
-        .checkin-tip.error {
-            color: #f8a5a5;
-            opacity: 1;
-        }
-        .checkin-wall {
-            max-height: 350px;
-            overflow-y: auto;
-            text-align: left;
-            border-top: 1px solid rgba(0, 180, 216, 0.15);
-            padding-top: 16px;
-            scrollbar-width: thin;
-            scrollbar-color: rgba(0, 180, 216, 0.3) transparent;
-        }
-        .checkin-wall::-webkit-scrollbar {
-            width: 4px;
-        }
-        .checkin-wall::-webkit-scrollbar-thumb {
-            background: rgba(0, 180, 216, 0.3);
-            border-radius: 4px;
-        }
-        .checkin-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 14px;
-            margin-bottom: 6px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.04);
-            border-left: 3px solid var(--primary-teal);
-            transition: background 0.2s;
-            animation: fadeInItem 0.4s ease;
-        }
-        .checkin-item:hover {
-            background: rgba(255, 255, 255, 0.08);
-        }
-        .checkin-item .name {
-            font-weight: 500;
-            color: var(--text-light);
-            font-size: 1rem;
-        }
-        .checkin-item .name .emoji {
-            margin-right: 6px;
-        }
-        .checkin-item .time {
-            font-size: 0.8rem;
-            color: var(--light-teal);
-            opacity: 0.6;
-            flex-shrink: 0;
-            margin-left: 12px;
-        }
-        .checkin-item .badge {
-            font-size: 0.7rem;
-            background: rgba(42, 157, 143, 0.2);
-            color: var(--highlight-green);
-            padding: 2px 10px;
-            border-radius: 20px;
-            margin-left: 8px;
-            flex-shrink: 0;
-        }
-        .checkin-loading,
-        .checkin-empty {
-            text-align: center;
-            padding: 30px 0;
-            color: var(--light-teal);
-            opacity: 0.6;
-            font-size: 0.95rem;
-        }
-        .checkin-footer {
-            margin-top: 16px;
-            text-align: center;
-            font-size: 0.85rem;
-            color: var(--light-teal);
-            opacity: 0.5;
-            border-top: 1px solid rgba(0, 180, 216, 0.1);
-            padding-top: 14px;
-        }
-        @keyframes fadeInItem {
-            from { opacity: 0; transform: translateY(-10px) scale(0.95); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        /* 庆祝动画容器 */
-        #celebration-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 9997;
-            overflow: hidden;
-        }
-        .confetti-piece {
-            position: absolute;
-            width: 10px;
-            height: 10px;
-            opacity: 0;
-            animation: confettiFall linear forwards;
-        }
-        @keyframes confettiFall {
-            0% {
-                opacity: 1;
-                transform: translateY(-20px) rotate(0deg) scale(0.5);
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(110vh) rotate(720deg) scale(1.2);
-            }
-        }
-        .float-star {
-            position: absolute;
-            font-size: 2rem;
-            animation: starFloat 1.2s ease-out forwards;
-            pointer-events: none;
-        }
-        @keyframes starFloat {
-            0% {
-                opacity: 1;
-                transform: translateY(0) scale(0.5) rotate(0deg);
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(-150px) scale(1.5) rotate(360deg);
-            }
-        }
-
         /* ———— 社交 & 页脚 ———— */
         .social-section {
             text-align: center;
@@ -675,7 +412,6 @@ html
             background: rgba(0, 53, 64, 0.7);
             border-top: 1px solid rgba(0, 180, 216, 0.3);
         }
-
         /* ———— 动画 ———— */
         @keyframes float {
             0% { transform: translateY(0px); }
@@ -690,7 +426,6 @@ html
         @keyframes ripple {
             to { transform: scale(2.5); opacity: 0; }
         }
-
         @media (max-width: 768px) {
             .container { max-width: 95%; }
             h1 { font-size: 2.2rem; }
@@ -702,13 +437,330 @@ html
             .birthday-card { padding: 35px 25px; }
             .birthday-title { font-size: 2rem; }
             .birthday-icon { font-size: 5rem; }
-            .checkin-stats { gap: 30px; }
-            .stat-number { font-size: 1.8rem; }
-            .checkin-form { flex-direction: column; }
-            .checkin-form input { min-width: unset; width: 100%; }
-            .checkin-form button { width: 100%; }
-            .checkin-item { flex-wrap: wrap; gap: 4px; }
-            .checkin-item .time { margin-left: 0; width: 100%; font-size: 0.75rem; }
+        }
+
+        /* ———— 击爪小游戏 ———— */
+        .paw-button {
+            position: fixed;
+            bottom: -20px;
+            right: -10px;
+            width: 100px;
+            height: 100px;
+            cursor: pointer;
+            z-index: 100;
+            animation: pawPeek 2s ease-out forwards, pawWiggle 3s ease-in-out 2s infinite;
+            transition: transform 0.3s ease;
+            filter: drop-shadow(0 0 15px rgba(0, 180, 216, 0.5));
+        }
+        .paw-button:hover {
+            transform: scale(1.1) translateY(-5px);
+            filter: drop-shadow(0 0 25px rgba(42, 157, 143, 0.7));
+        }
+        .paw-button img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transform: rotate(-30deg);
+            mix-blend-mode: multiply;
+            filter: brightness(1.05) contrast(1.1);
+        }
+        @keyframes pawPeek {
+            0% {
+                bottom: -80px;
+                right: -60px;
+                opacity: 0;
+            }
+            100% {
+                bottom: -20px;
+                right: -10px;
+                opacity: 1;
+            }
+        }
+        @keyframes pawWiggle {
+            0%, 100% {
+                transform: rotate(0deg) translateY(0);
+            }
+            25% {
+                transform: rotate(-5deg) translateY(-3px);
+            }
+            75% {
+                transform: rotate(5deg) translateY(3px);
+            }
+        }
+        
+        /* 游戏模态框 */
+        .paw-game-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 40, 50, 0.75);
+            backdrop-filter: blur(12px);
+            z-index: 9997;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+        .paw-game-modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .paw-game-container {
+            background: linear-gradient(135deg, rgba(0, 119, 182, 0.25), rgba(42, 157, 143, 0.25));
+            border: 2px solid rgba(0, 180, 216, 0.5);
+            border-radius: 25px;
+            padding: 35px 30px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(0, 180, 216, 0.3);
+            position: relative;
+            overflow: hidden;
+            animation: gameCardFloat 4s ease-in-out infinite;
+        }
+        .paw-game-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 180, 216, 0.15), transparent);
+            animation: gameLightSweep 8s linear infinite;
+        }
+        @keyframes gameCardFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        @keyframes gameLightSweep {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .game-close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(0, 180, 216, 0.4);
+            color: var(--text-light);
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        .game-close-btn:hover {
+            background: rgba(0, 180, 216, 0.3);
+            transform: scale(1.1);
+        }
+        .game-title {
+            text-align: center;
+            font-size: 2rem;
+            background: linear-gradient(45deg, var(--light-teal), var(--highlight-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* 游戏信息栏 */
+        .game-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        .game-score, .game-timer {
+            background: rgba(0, 119, 182, 0.3);
+            border: 1px solid rgba(0, 180, 216, 0.4);
+            border-radius: 20px;
+            padding: 8px 20px;
+            font-size: 1rem;
+            color: var(--text-light);
+        }
+        .game-score span, .game-timer span {
+            font-weight: bold;
+            color: var(--highlight-green);
+            font-size: 1.3rem;
+        }
+        .game-high-score {
+            text-align: center;
+            color: var(--light-teal);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        .game-high-score span {
+            color: var(--highlight-green);
+            font-weight: bold;
+        }
+        
+        /* 游戏区域 */
+        .game-area {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            padding: 20px;
+            background: rgba(0, 53, 64, 0.4);
+            border-radius: 20px;
+            border: 1px solid rgba(0, 180, 216, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+        .game-hole {
+            aspect-ratio: 1;
+            background: radial-gradient(ellipse at center, rgba(0, 30, 40, 0.8) 0%, rgba(0, 53, 64, 0.6) 70%, transparent 100%);
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .game-hole::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 10%;
+            width: 80%;
+            height: 30%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.5), transparent);
+            border-radius: 50%;
+        }
+        .game-hole-paw {
+            position: absolute;
+            bottom: -100%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70%;
+            height: 70%;
+            transition: bottom 0.25s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            pointer-events: none;
+        }
+        .game-hole-paw img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            mix-blend-mode: multiply;
+            filter: brightness(1.05) contrast(1.1) drop-shadow(0 0 10px rgba(0, 180, 216, 0.5));
+        }
+        .game-hole.active .game-hole-paw {
+            bottom: 10%;
+        }
+        .game-hole.hit .game-hole-paw img {
+            animation: pawHit 0.3s ease-out;
+        }
+        @keyframes pawHit {
+            0% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.3) rotate(15deg); filter: brightness(1.05) contrast(1.1) drop-shadow(0 0 20px var(--highlight-green)); }
+            100% { transform: scale(0.8) rotate(-10deg); opacity: 0.5; }
+        }
+        .game-hole:hover {
+            transform: scale(1.05);
+        }
+        
+        /* 游戏界面状态 */
+        .game-screen {
+            display: none;
+            position: relative;
+            z-index: 1;
+        }
+        .game-screen.active {
+            display: block;
+            animation: fadeInScreen 0.4s ease;
+        }
+        @keyframes fadeInScreen {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* 开始/结束界面 */
+        .game-start-screen, .game-end-screen {
+            text-align: center;
+            padding: 20px 0;
+        }
+        .game-desc {
+            color: var(--text-light);
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+        .game-desc p {
+            margin-bottom: 10px;
+        }
+        .game-final-score {
+            font-size: 3rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, var(--light-teal), var(--highlight-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 15px 0;
+        }
+        .game-new-record {
+            color: #ffd700;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            animation: recordPulse 1s ease-in-out infinite;
+        }
+        @keyframes recordPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        .game-btn {
+            padding: 14px 40px;
+            background: linear-gradient(135deg, var(--highlight-green), var(--primary-teal));
+            border: none;
+            border-radius: 30px;
+            color: #fff;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(42, 157, 143, 0.4);
+            font-weight: 500;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+        .game-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 30px rgba(0, 180, 216, 0.5);
+        }
+        .game-btn:active {
+            transform: scale(0.98);
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .paw-button {
+                width: 80px;
+                height: 80px;
+            }
+            .paw-game-container {
+                padding: 25px 20px;
+                margin: 20px;
+            }
+            .game-title {
+                font-size: 1.6rem;
+            }
+            .game-area {
+                gap: 10px;
+                padding: 15px;
+            }
+            .game-final-score {
+                font-size: 2.5rem;
+            }
         }
     </style>
 </head>
@@ -718,7 +770,6 @@ html
         <div class="fan-loader"><span></span></div>
         <div class="loading-text">Loading...</div>
     </div>
-
     <!-- 生日彩蛋 -->
     <div id="birthdayEgg">
        <canvas id="fireworks"></canvas>
@@ -729,10 +780,6 @@ html
             <button class="birthday-close" id="closeBirthday">开启新岁✨</button>
         </div>
     </div>
-
-    <!-- 庆祝动画容器 -->
-    <div id="celebration-container"></div>
-
     <!-- 主体 -->
     <div class="container">
         <header>
@@ -741,7 +788,6 @@ html
             <p class="subtitle">furry | Arknights | Minecraft | 嗷呜～</p>
             <div class="tagline">连接 · 创造 · 分享</div>
         </header>
-
         <div class="about-section">
             <h2>关于咱</h2>
             <div class="about-content">
@@ -750,39 +796,6 @@ html
                 <p>欢迎与咱进行社交，也很高兴认识你呢~</p>
             </div>
         </div>
-
-        <!-- ====== 访客打卡墙 ====== -->
-        <div class="checkin-section">
-            <h2>📝 访客打卡墙</h2>
-            <div class="checkin-container">
-                <div class="checkin-stats">
-                    <div class="stat-item">
-                        <span class="stat-number" id="totalCount">0</span>
-                        <span class="stat-label">总打卡</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number" id="todayCount">0</span>
-                        <span class="stat-label">今日打卡</span>
-                    </div>
-                </div>
-
-                <div class="checkin-input-area">
-                    <div class="checkin-form">
-                        <input type="text" id="checkinName" placeholder="输入你的名字..." maxlength="20" autocomplete="off">
-                        <button id="checkinBtn">✨ 打卡</button>
-                    </div>
-                    <p class="checkin-tip" id="checkinTip">留下你的名字，让霜岚知道你来过～</p>
-                </div>
-
-                <div class="checkin-wall" id="checkinWall">
-                    <div class="checkin-loading">加载打卡记录中...</div>
-                </div>
-                <div class="checkin-footer">
-                    <span id="checkinTotal">共 0 条打卡</span>
-                </div>
-            </div>
-        </div>
-
         <div class="social-section">
             <h2 class="social-title">与咱联系</h2>
             <div class="social-links">
@@ -803,6 +816,82 @@ html
         </footer>
     </div>
 
+    <!-- 击爪小游戏按钮 -->
+    <div class="paw-button" id="pawButton" title="来玩击爪小游戏～">
+        <img src="/2.png" alt="爪子">
+    </div>
+    
+    <!-- 击爪小游戏模态框 -->
+    <div class="paw-game-modal" id="pawGameModal">
+        <div class="paw-game-container">
+            <button class="game-close-btn" id="gameCloseBtn">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2 class="game-title">🐾 击爪小游戏</h2>
+            
+            <!-- 开始界面 -->
+            <div class="game-screen game-start-screen active" id="gameStartScreen">
+                <div class="game-high-score">
+                    最高分：<span id="startHighScore">0</span>
+                </div>
+                <div class="game-desc">
+                    <p>🎯 点击从洞里冒出来的爪子</p>
+                    <p>⏱️ 30秒内尽可能多地击中</p>
+                    <p>🏆 挑战你的最高分！</p>
+                </div>
+                <button class="game-btn" id="startGameBtn">开始游戏</button>
+            </div>
+            
+            <!-- 游戏进行界面 -->
+            <div class="game-screen" id="gamePlayScreen">
+                <div class="game-info">
+                    <div class="game-score">得分：<span id="gameScore">0</span></div>
+                    <div class="game-timer">时间：<span id="gameTimer">30</span>s</div>
+                </div>
+                <div class="game-area" id="gameArea">
+                    <div class="game-hole" data-index="0">
+                        <div class="game-hole-paw"><img src="/2.png" alt="爪子"></div>
+                    </div>
+                    <div class="game-hole" data-index="1">
+                        <div class="game-hole-paw"><img src="/2.png" alt="爪子"></div>
+                    </div>
+                    <div class="game-hole" data-index="2">
+                        <div class="game-hole-paw"><img src="/2.png" alt="爪子"></div>
+                    </div>
+                    <div class="game-hole" data-index="3">
+                        <div class="game-hole-paw"><img src="/2.png" alt="爪子"></div>
+                    </div>
+                    <div class="game-hole" data-index="4">
+                        <div class="game-hole-paw"><img src="/2.png" alt="爪子"></div>
+                    </div>
+                    <div class="game-hole" data-index="5">
+                        <div class="game-hole-paw"><img src="/2.png" alt="爪子"></div>
+                    </div>
+                    <div class="game-hole" data-index="6">
+                        <div class="game-hole-paw"><img src="/2.png" alt="爪子"></div>
+                    </div>
+                    <div class="game-hole" data-index="7">
+                        <div class="game-hole-paw"><img src="/2.png" alt="爪子"></div>
+                    </div>
+                    <div class="game-hole" data-index="8">
+                        <div class="game-hole-paw"><img src="/2.png" alt="爪子"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 结束界面 -->
+            <div class="game-screen game-end-screen" id="gameEndScreen">
+                <div class="game-high-score">
+                    最高分：<span id="endHighScore">0</span>
+                </div>
+                <div>最终得分</div>
+                <div class="game-final-score" id="finalScore">0</div>
+                <div class="game-new-record" id="newRecordText" style="display:none;">🎉 新纪录！</div>
+                <button class="game-btn" id="restartGameBtn">再来一次</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // ============================================================
         //  预加载 & 生日彩蛋 & 交互（原有功能）
@@ -812,7 +901,6 @@ html
             preloader.classList.add('hidden');
             setTimeout(checkBirthdayEgg, 500);
         });
-
         function checkBirthdayEgg() {
             const now = new Date();
             const month = now.getMonth() + 1;
@@ -824,7 +912,6 @@ html
                 typeWriter();
             }
         }
-
         function typeWriter() {
             const text = "6月27日，岁岁常欢愉，万事皆胜意，愿你永远热烈自由✨";
             const ele = document.getElementById('typeText');
@@ -838,7 +925,6 @@ html
             }
             write();
         }
-
         function initFireworks() {
             const canvas = document.getElementById('fireworks');
             const ctx = canvas.getContext('2d');
@@ -881,11 +967,9 @@ html
             }
             loop();
         }
-
         document.getElementById('closeBirthday').addEventListener('click', () => {
             document.getElementById('birthdayEgg').classList.remove('show');
         });
-
         document.addEventListener('click', function(e) {
             const ripple = document.createElement('div');
             ripple.className = 'ripple';
@@ -896,284 +980,195 @@ html
         });
 
         // ============================================================
-        //  访客打卡功能（纯前端 + JSONBin 存储）
+        //  击爪小游戏
         // ============================================================
         (function() {
-            // ====== 🔧 配置（请替换为你的 JSONBin 信息） ======
-            const BIN_ID = '6a377106da38895dfee589e8';           // 从 JSONBin 获取
-            const API_KEY = '$2a$10$YKHMv52.TvFKifsQuUnVQeKeXjnmR3EbXk5Lf6c6ym4r.AUjlM0aS';      // 从 JSONBin 获取
-            const API_URL = 'https://api.jsonbin.io/v3/b/6a377106da38895dfee589e8';
-            // ===================================================
-
-            // 🔧 违禁词列表（自行填写）
-            const BANNED_WORDS = [
-                // '违禁词1',
-                // '违禁词2',
-            ];
-
-            // DOM 元素
-            const input = document.getElementById('checkinName');
-            const btn = document.getElementById('checkinBtn');
-            const tip = document.getElementById('checkinTip');
-            const wall = document.getElementById('checkinWall');
-            const totalEl = document.getElementById('totalCount');
-            const todayEl = document.getElementById('todayCount');
-            const totalFooter = document.getElementById('checkinTotal');
-
-            const emojis = ['🐾', '🌟', '✨', '🌈', '🎈', '🌸', '🌿', '🍀', '💫', '⭐', '🦊', '🐱', '🌺', '🍃', '🎀', '🧸'];
-
-            // 从 localStorage 读取上次输入的名字
-            const savedName = localStorage.getItem('checkin_visitor_name');
-            if (savedName) {
-                input.value = savedName;
+            const pawButton = document.getElementById('pawButton');
+            const gameModal = document.getElementById('pawGameModal');
+            const gameCloseBtn = document.getElementById('gameCloseBtn');
+            const startScreen = document.getElementById('gameStartScreen');
+            const playScreen = document.getElementById('gamePlayScreen');
+            const endScreen = document.getElementById('gameEndScreen');
+            const startGameBtn = document.getElementById('startGameBtn');
+            const restartGameBtn = document.getElementById('restartGameBtn');
+            const gameScoreEl = document.getElementById('gameScore');
+            const gameTimerEl = document.getElementById('gameTimer');
+            const finalScoreEl = document.getElementById('finalScore');
+            const startHighScoreEl = document.getElementById('startHighScore');
+            const endHighScoreEl = document.getElementById('endHighScore');
+            const newRecordText = document.getElementById('newRecordText');
+            const gameArea = document.getElementById('gameArea');
+            const holes = document.querySelectorAll('.game-hole');
+            
+            let score = 0;
+            let timeLeft = 30;
+            let gameInterval = null;
+            let timerInterval = null;
+            let isPlaying = false;
+            let highScore = parseInt(localStorage.getItem('pawGameHighScore') || '0');
+            
+            // 更新最高分显示
+            function updateHighScoreDisplay() {
+                startHighScoreEl.textContent = highScore;
+                endHighScoreEl.textContent = highScore;
             }
-
-            // ====== 违禁词检测 ======
-            function containsBannedWord(text) {
-                if (!BANNED_WORDS.length) return false;
-                const lowerText = text.toLowerCase();
-                for (const word of BANNED_WORDS) {
-                    if (word && lowerText.includes(word.toLowerCase())) {
-                        return true;
-                    }
-                }
-                return false;
-            }
-
-            // ====== JSONBin 数据读写 ======
-            async function loadData() {
-                try {
-                    const res = await fetch(API_URL, {
-                        headers: { 'X-Master-Key': API_KEY }
-                    });
-                    if (!res.ok) throw new Error('Load failed');
-                    const data = await res.json();
-                    return data.record || { total: 0, todayCount: 0, lastDate: '', records: [] };
-                } catch (err) {
-                    console.warn('加载数据失败:', err);
-                    return { total: 0, todayCount: 0, lastDate: '', records: [] };
-                }
-            }
-
-            async function saveData(data) {
-                await fetch(API_URL, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-Master-Key': API_KEY
-                    },
-                    body: JSON.stringify(data)
-                });
-            }
-
-            // ====== 获取打卡列表 ======
-            async function fetchCheckins() {
-                try {
-                    wall.innerHTML = '<div class="checkin-loading">加载打卡记录中...</div>';
-                    const data = await loadData();
-                    
-                    totalEl.textContent = data.total || 0;
-                    todayEl.textContent = data.todayCount || 0;
-
-                    if (data.records && data.records.length > 0) {
-                        renderCheckins(data.records);
-                        totalFooter.textContent = `共 ${data.records.length} 条打卡`;
-                    } else {
-                        wall.innerHTML = '<div class="checkin-empty">还没有打卡记录，快来留下你的名字吧 🐾</div>';
-                    return;
-                }
-                let html = '';
-                const today = new Date().toISOString().split('T')[0];
-                records.forEach((r, index) => {
-                    const emoji = emojis[index % emojis.length];
-                    const isToday = r.time && r.time.startsWith(today);
-                    const badge = isToday ? '<span class="badge">今日</span>' : '';
-                    html += `
-                        <div class="checkin-item">
-                            <span class="name"><span class="emoji">${emoji}</span>${escapeHtml(r.name)} ${badge}</span>
-                            <span class="time">${r.timeStr || r.time}</span>
-                        </div>
-                    `;
-                });
-                wall.innerHTML = html;
-                if (wall.firstChild) {
-                    wall.scrollTop = 0;
-                }
-            }
-
-            function escapeHtml(text) {
-                const div = document.createElement('div');
-                div.textContent = text;
-                return div.innerHTML;
-            }
-
-            function formatTime(date) {
-                const y = date.getFullYear();
-                const m = String(date.getMonth() + 1).padStart(2, '0');
-                const d = String(date.getDate()).padStart(2, '0');
-                const h = String(date.getHours()).padStart(2, '0');
-                const min = String(date.getMinutes()).padStart(2, '0');
-                return `${y}-${m}-${d} ${h}:${min}`;
-            }
-
-            // ====== 庆祝动画 ======
-            function triggerCelebration() {
-                const container = document.getElementById('celebration-container');
-                const colors = ['#ff6b6b', '#feca57', '#48dbfb', '#1dd1a1', '#a29bfe', '#fd79a8', '#00b4d8', '#2a9d8f'];
-                for (let i = 0; i < 30; i++) {
-                    const el = document.createElement('div');
-                    el.className = 'confetti-piece';
-                    const size = 6 + Math.random() * 10;
-                    el.style.width = size + 'px';
-                    el.style.height = size + 'px';
-                    el.style.background = colors[Math.floor(Math.random() * colors.length)];
-                    el.style.left = Math.random() * 100 + '%';
-                    el.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
-                    el.style.animationDuration = (1.5 + Math.random() * 2) + 's';
-                    el.style.animationDelay = (Math.random() * 0.5) + 's';
-                    container.appendChild(el);
-                    setTimeout(() => el.remove(), 4000);
-                }
-                const starSymbols = ['⭐', '🌟', '✨', '💫', '🎉', '🎊'];
-                for (let i = 0; i < 8; i++) {
-                    const el = document.createElement('div');
-                    el.className = 'float-star';
-                    el.textContent = starSymbols[Math.floor(Math.random() * starSymbols.length)];
-                    el.style.left = (10 + Math.random() * 80) + '%';
-                    el.style.top = (30 + Math.random() * 50) + '%';
-                    el.style.fontSize = (1.5 + Math.random() * 2) + 'rem';
-                    el.style.animationDuration = (0.8 + Math.random() * 0.6) + 's';
-                    container.appendChild(el);
-                    setTimeout(() => el.remove(), 2000);
-                }
-                document.querySelectorAll('.stat-number').forEach(el => {
-                    el.classList.remove('pop');
-                    void el.offsetWidth;
-                    el.classList.add('pop');
-                });
-            }
-
-            // 按钮涟漪
-            function createRipple(e) {
-                const button = e.currentTarget;
-                const rect = button.getBoundingClientRect();
-                const ripple = document.createElement('span');
-                ripple.className = 'ripple-effect';
-                const size = Math.max(rect.width, rect.height);
-                ripple.style.width = ripple.style.height = size + 'px';
-                ripple.style.left = (e.clientX - rect.left - size/2) + 'px';
-                ripple.style.top = (e.clientY - rect.top - size/2) + 'px';
-                button.appendChild(ripple);
-                setTimeout(() => ripple.remove(), 600);
-            }
-            btn.addEventListener('click', createRipple);
-
-            // ====== 执行打卡 ======
-            async function doCheckin() {
-                const name = input.value.trim();
-
-                if (!name) {
-                    tip.textContent = '⚠️ 请输入你的名字～';
-                    tip.className = 'checkin-tip error';
-                    input.focus();
-                    return;
-                }
-
-                if (name.length > 20) {
-                    tip.textContent = '⚠️ 名字不能超过20个字符哦～';
-                    tip.className = 'checkin-tip error';
-                    return;
-                }
-
-                // 违禁词检测
-                if (containsBannedWord(name)) {
-                    tip.textContent = '⚠️ 检测到敏感内容，请重新输入～';
-                    tip.className = 'checkin-tip error';
-                    input.value = '';
-                    input.focus();
-                    return;
-                }
-
-                btn.disabled = true;
-                btn.textContent = '⏳ 打卡中...';
-                tip.textContent = '正在记录...';
-                tip.className = 'checkin-tip';
-
-                try {
-                // 读取现有数据
-                    const data = await loadData();
-                    
-                    const now = new Date();
-                    const today = now.toISOString().split('T')[0];
-                    
-                    // 添加新记录
-                    const newRecord = {
-                        name: name,
-                        time: now.toISOString(),
-                        timeStr: formatTime(now)
-                    };
-                    data.records.unshift(newRecord);
-                    
-                    // 更新总打卡数
-                    data.total = (data.total || 0) + 1;
-                    
-                    // 更新今日打卡数
-                    if (data.lastDate !== today) {
-                        data.todayCount = 1;
-                        data.lastDate = today;
-                    } else {
-                        data.todayCount = (data.todayCount || 0) + 1;
-                    }
-                    
-                    // 保存到 JSONBin
-                    await saveData(data);
-                    
-                    // 更新 UI
-                    localStorage.setItem('checkin_visitor_name', name);
-                    tip.textContent = '🎉 打卡成功！感谢你的来访～';
-                    tip.className = 'checkin-tip success';
-                    input.value = '';
-
-                    totalEl.textContent = data.total;
-                    todayEl.textContent = data.todayCount;
-                    
-                    triggerCelebration();
-                    await fetchCheckins();
-
-                    document.querySelector('.checkin-section').scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-                    setTimeout(() => {
-                        btn.disabled = false;
-                        btn.textContent = '✨ 打卡';
-                    }, 1500);
-                } catch (err) {
-                    console.error('打卡失败:', err);
-                    tip.textContent = '⚠️ 打卡失败，请稍后重试';
-                    tip.className = 'checkin-tip error';
-                    btn.disabled = false;
-                    btn.textContent = '✨ 打卡';
-                }
-            }
-
-            input.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    doCheckin();
+            updateHighScoreDisplay();
+            
+            // 显示/隐藏游戏
+            pawButton.addEventListener('click', function() {
+                gameModal.classList.add('show');
+                showScreen('start');
+            });
+            
+            gameCloseBtn.addEventListener('click', function() {
+                gameModal.classList.remove('show');
+                stopGame();
+            });
+            
+            // 点击模态框背景关闭
+            gameModal.addEventListener('click', function(e) {
+                if (e.target === gameModal) {
+                    gameModal.classList.remove('show');
+                    stopGame();
                 }
             });
-
-            btn.addEventListener('click', doCheckin);
-
-            // 页面加载后获取数据
-            if (document.readyState === 'complete') {
-                fetchCheckins();
-            } else {
-                window.addEventListener('load', fetchCheckins);
+            
+            // 切换界面
+            function showScreen(screen) {
+                startScreen.classList.remove('active');
+                playScreen.classList.remove('active');
+                endScreen.classList.remove('active');
+                
+                if (screen === 'start') {
+                    startScreen.classList.add('active');
+                } else if (screen === 'play') {
+                    playScreen.classList.add('active');
+                } else if (screen === 'end') {
+                    endScreen.classList.add('active');
+                }
             }
-
-            // 每30秒刷新
-            setInterval(fetchCheckins, 30000);
+            
+            // 开始游戏
+            function startGame() {
+                score = 0;
+                timeLeft = 30;
+                isPlaying = true;
+                gameScoreEl.textContent = score;
+                gameTimerEl.textContent = timeLeft;
+                gameTimerEl.style.color = '';
+                
+                showScreen('play');
+                
+                // 重置所有洞
+                holes.forEach(hole => {
+                    hole.classList.remove('active', 'hit');
+                });
+                
+                // 开始出现爪子
+                gameInterval = setInterval(spawnPaw, 800);
+                
+                // 开始倒计时
+                timerInterval = setInterval(function() {
+                    timeLeft--;
+                    gameTimerEl.textContent = timeLeft;
+                    
+                    if (timeLeft <= 10) {
+                        gameTimerEl.style.color = '#ff6b6b';
+                    }
+                    
+                    if (timeLeft <= 0) {
+                        endGame();
+                    }
+                }, 1000);
+            }
+            
+            // 停止游戏
+            function stopGame() {
+                isPlaying = false;
+                if (gameInterval) {
+                    clearInterval(gameInterval);
+                    gameInterval = null;
+                }
+                if (timerInterval) {
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                }
+                gameTimerEl.style.color = '';
+                
+                holes.forEach(hole => {
+                    hole.classList.remove('active', 'hit');
+                });
+            }
+            
+            // 结束游戏
+            function endGame() {
+                stopGame();
+                
+                finalScoreEl.textContent = score;
+                
+                // 检查是否新纪录
+                if (score > highScore) {
+                    highScore = score;
+                    localStorage.setItem('pawGameHighScore', highScore);
+                    newRecordText.style.display = 'block';
+                } else {
+                    newRecordText.style.display = 'none';
+                }
+                
+                updateHighScoreDisplay();
+                showScreen('end');
+            }
+            
+            // 生成爪子
+            function spawnPaw() {
+                if (!isPlaying) return;
+                
+                // 随机选择一个洞
+                const availableHoles = Array.from(holes).filter(h => !h.classList.contains('active'));
+                if (availableHoles.length === 0) return;
+                
+                const randomHole = availableHoles[Math.floor(Math.random() * availableHoles.length)];
+                randomHole.classList.add('active');
+                
+                // 爪子停留时间随分数增加而减少
+                const stayTime = Math.max(600, 1200 - score * 10);
+                
+                setTimeout(function() {
+                    if (randomHole.classList.contains('active')) {
+                        randomHole.classList.remove('active');
+                    }
+                }, stayTime);
+            }
+            
+            // 点击洞
+            holes.forEach(hole => {
+                hole.addEventListener('click', function() {
+                    if (!isPlaying) return;
+                    if (!hole.classList.contains('active')) return;
+                    if (hole.classList.contains('hit')) return;
+                    
+                    // 击中
+                    hole.classList.add('hit');
+                    score++;
+                    gameScoreEl.textContent = score;
+                    
+                    setTimeout(function() {
+                        hole.classList.remove('active', 'hit');
+                    }, 200);
+                });
+            });
+            
+            // 按钮事件
+            startGameBtn.addEventListener('click', startGame);
+            restartGameBtn.addEventListener('click', startGame);
+            
+            // 防止点击爪子图片时触发其他事件
+            document.querySelectorAll('.game-hole-paw img').forEach(img => {
+                img.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+            });
         })();
-    </script>
+</script>
 </body>
 </html>
